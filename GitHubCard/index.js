@@ -24,7 +24,10 @@
           user, and adding that card to the DOM.
 */
 
-function GitHubCard(login) {  // passing in the login name to get everything else
+// entry point
+const entryPoint = document.querySelector(".cards");
+
+function GitHubCard(object) {  // passing in the login name to get everything else
 
   const create = e => document.createElement(e);
 
@@ -56,13 +59,44 @@ function GitHubCard(login) {  // passing in the login name to get everything els
   cardProfile.appendChild(cardFollowings);
   cardProfile.appendChild(cardBio);
 
+
+  // setting up class elements
+
+  newCard.classList.add('card');
+  cardInfo.classList.add('card-info');
+  cardName.classList.add('name');
+  cardUserName.classList.add('username');
+
+  // set text content
+
+  cardImg.src = object.data.avatar_url;
+  cardName.textContent = `${object.data.name}`;
+  cardUserName.textContent = `Username: ${object.data.login}`;
+  cardUserLocation.textContent = `Location: ${object.data.location}`;
+  cardProfileLink.textContent = `Link: ${object.data.html_url}`;
+  cardFollowers.textContent = `Followers: ${object.data.followers}`;
+  cardFollowings.textContent = `Following: ${object.data.following}`;
+  cardBio.textContent = `Bio: ${object.data.bio}`;
+
+
+return newCard;
 }
 
 
-axios.get("https://api.github.com/users/lukasjaronis").then(response => {
+
+
+axios
+.get("https://api.github.com/users/lukasjaronis")
+.then(response => {
+
+const newHandle = GitHubCard(response);
+entryPoint.appendChild(newHandle);
 
 
 });
+
+
+
 
 
 const followersArray = [];
