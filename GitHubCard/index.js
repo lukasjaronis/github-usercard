@@ -27,7 +27,7 @@
 // entry point
 const entryPoint = document.querySelector(".cards");
 
-function GitHubCard(object) {  // passing in the login name to get everything else
+function GitHubCard(object) { // passing in the login name to get everything else
 
   const create = e => document.createElement(e);
 
@@ -48,7 +48,7 @@ function GitHubCard(object) {  // passing in the login name to get everything el
 
   // appending elements
 
-  newCard.appendChild(cardImg); 
+  newCard.appendChild(cardImg);
   newCard.appendChild(cardInfo);
   cardInfo.appendChild(cardName);
   cardInfo.appendChild(cardUserName);
@@ -79,36 +79,36 @@ function GitHubCard(object) {  // passing in the login name to get everything el
   cardBio.textContent = `Bio: ${object.data.bio}`;
 
 
-return newCard;
+  return newCard;
 }
 
 
 
 
 axios
-.get("https://api.github.com/users/lukasjaronis")
-.then(response => {
+  .get("https://api.github.com/users/lukasjaronis")
+  .then(response => {
 
-const newHandle = GitHubCard(response);
-entryPoint.appendChild(newHandle);
+    const newHandle = GitHubCard(response); // creating a new variable to later attach it to the entry point in HTML. GitHubCard(response): the response we get from git API pretty much attachs its objects to our function, connects it all as it goes down, and boom.
+    entryPoint.appendChild(newHandle);
 
 
-});
+  });
 
 axios
-.get("https://api.github.com/users/lukasjaronis/followers")
-.then(response => {
-response.data.forEach(element => {
-  axios.get(element.url)
+  .get("https://api.github.com/users/lukasjaronis/followers")
   .then(response => {
-    //console.log(response);
-    const newHandle = GitHubCard(response);
-    entryPoint.appendChild(newHandle);
-  })
-})
+    response.data.forEach(element => { // so we get the response from my followers, then we itterate through every response, we get the elements (in this case the github url of the follower) and essentially run it like the above axios for only 1 user. So we're just getting the urls of the followers. 
+      axios.get(element.url)
+        .then(response => {
+          //console.log(response);
+          const newHandle = GitHubCard(response); // same with this one, but it uses the response of my followers.
+          entryPoint.appendChild(newHandle);
+        })
+    })
 
 
-});
+  });
 
 
 
