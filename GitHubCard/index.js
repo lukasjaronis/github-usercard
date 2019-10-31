@@ -1,5 +1,5 @@
 /* Step 1: using axios, send a GET request to the following URL 
-           (replacing the palceholder with your Github name):
+           (replacing the placeholder with your Github name):
            https://api.github.com/users/<your name>
 */
 
@@ -23,6 +23,47 @@
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+
+function GitHubCard(login) {  // passing in the login name to get everything else
+
+  const create = e => document.createElement(e);
+
+
+  // setting up new elements
+  let newCard = create('div');
+  let cardImg = create('img');
+  let cardInfo = create('div');
+  let cardName = create('h3');
+  let cardUserName = create('p');
+  let cardUserLocation = create('p');
+  let cardProfile = create('p');
+  let cardProfileLink = create('a'); // append this to cardProfile
+  let cardFollowers = create('p');
+  let cardFollowings = create('p');
+  let cardBio = create('p');
+
+
+  // appending elements
+
+  newCard.appendChild(cardImg); 
+  newCard.appendChild(cardInfo);
+  cardInfo.appendChild(cardName);
+  cardInfo.appendChild(cardUserName);
+  cardInfo.appendChild(cardUserLocation);
+  cardInfo.appendChild(cardProfile);
+  cardProfile.appendChild(cardProfileLink);
+  cardProfile.appendChild(cardFollowers);
+  cardProfile.appendChild(cardFollowings);
+  cardProfile.appendChild(cardBio);
+
+}
+
+
+axios.get("https://api.github.com/users/lukasjaronis").then(response => {
+
+
+});
+
 
 const followersArray = [];
 
