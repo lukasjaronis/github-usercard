@@ -27,7 +27,7 @@
 // entry point
 const entryPoint = document.querySelector(".cards");
 
-function GitHubCard(object) { // passing in the login name to get everything else
+function GitHubCard(object) { // passing in the object 
 
   const create = e => document.createElement(e);
 
@@ -73,7 +73,8 @@ function GitHubCard(object) { // passing in the login name to get everything els
   cardName.textContent = `${object.data.name}`;
   cardUserName.textContent = `Username: ${object.data.login}`;
   cardUserLocation.textContent = `Location: ${object.data.location}`;
-  cardProfileLink.textContent = `Link: ${object.data.html_url}`;
+  cardProfileLink.href = object.data.html_url;
+  cardProfileLink.textContent = object.data.html_url;
   cardFollowers.textContent = `Followers: ${object.data.followers}`;
   cardFollowings.textContent = `Following: ${object.data.following}`;
   cardBio.textContent = `Bio: ${object.data.bio}`;
