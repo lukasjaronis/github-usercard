@@ -95,7 +95,20 @@ entryPoint.appendChild(newHandle);
 
 });
 
+axios
+.get("https://api.github.com/users/lukasjaronis/followers")
+.then(response => {
+response.data.forEach(element => {
+  axios.get(element.url)
+  .then(response => {
+    //console.log(response);
+    const newHandle = GitHubCard(response);
+    entryPoint.appendChild(newHandle);
+  })
+})
 
+
+});
 
 
 
